@@ -1,62 +1,41 @@
+import CourseCard from '@/components/CourseCard';
+import CoursesHeader from '@/components/CoursesHeader';
 import { fetchCourses } from '@/lib/data';
-import { Chip } from '@heroui/react';
-import { Users } from 'lucide-react';
-import Image from 'next/image';
+import { Button } from '@heroui/react';
+import { BookOpen } from 'lucide-react';
 import React from 'react';
 
-const CoursesPage = async () => {
+const CoursePage = async () => {
   const allCourses = await fetchCourses();
-
+  
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-      {allCourses?.map(course => {
-        const { _id, title, thumbnail, category, price } = course;
+    <div className="min-h-screen bg-slate-50">
+      {/* Header */}
+      <CoursesHeader />
 
-        return (
-          <div
-            key={_id}
-            className="group flex flex-col bg-white rounded-3xl border border-slate-200 overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+      <main className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center mb-12">
+          <h2 className="text-2xl font-bold flex items-center gap-2">
+            <BookOpen className="w-6 h-6 text-blue-600" />
+            All Courses
+          </h2>
+          <Button
+            variant="flat"
+            // startContent={<Filter className="w-4 h-4" />}
+            className="rounded-full font-bold"
           >
-            <div className="relative aspect-16/10 overflow-hidden">
-              <Image
-                src={
-                  thumbnail ||
-                  'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=600'
-                }
-                alt={title || 'Course Image'}
-                height={400}
-                width={640}
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                className="object-cover group-hover:scale-110 transition-transform duration-700"
-              />
-              <div className="absolute top-3 right-3">
-                <Chip
-                  size="sm"
-                  color="primary"
-                  variant="solid"
-                  className="font-bold text-[10px] uppercase"
-                >
-                  {category || 'Premium'}
-                </Chip>
-              </div>
-            </div>
-            <div className="p-5 flex flex-col grow space-y-3">
-              <h4 className="font-bold text-slate-900 line-clamp-2 group-hover:text-blue-600 transition-colors">
-                {title}
-              </h4>
-              <div className="flex items-center justify-between pt-2 border-t border-slate-50">
-                <div className="flex items-center gap-1 text-[10px] font-bold text-slate-400">
-                  <Users className="w-3 h-3" />
-                  <span>0</span>
-                </div>
-                <span className="font-black text-blue-600">${price}</span>
-              </div>
-            </div>
-          </div>
-        );
-      })}
+            Filters
+          </Button>
+        </div>
+        {/* All courses cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {allCourses?.map(course => (
+            <CourseCard key={course._id} course={course} />
+          ))}
+        </div>
+      </main>
     </div>
   );
 };
 
-export default CoursesPage;
+export default CoursePage;

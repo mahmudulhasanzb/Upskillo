@@ -9,3 +9,12 @@ export const fetchCourses = async () => {
   const data = await res.json();
   return data;
 };
+
+
+export const fetchCourseDetais = async (courseId) => {
+  const res = await fetch(
+    `http://localhost:8000/courses/${courseId}`,
+  );
+  const data = res.json()
+  return data
+}
