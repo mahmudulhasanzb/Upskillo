@@ -2,6 +2,7 @@ import { Button } from '@heroui/react';
 import { ArrowRight } from 'lucide-react';
 
 import FeaturedCard from './FeaturedCard';
+import Link from 'next/link';
 
 const FeaturedCourses = async () => {
   return (
@@ -20,20 +21,19 @@ const FeaturedCourses = async () => {
               in-demand skills in the industry today.
             </p>
           </div>
-          <Button
-            variant="flat"
-            color="primary"
-            className="rounded-full font-bold group"
-          >
-            View All Courses{' '}
-            <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </Button>
+          <Link href={'/courses'}>
+            <Button
+              variant="flat"
+              color="primary"
+              className="rounded-full font-bold group hover:text-blue-600 hover:bg-blue-50 transition-all duration-700"
+            >
+              View All Courses{' '}
+              <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </Link>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <FeaturedCard />
-          <FeaturedCard />
-          <FeaturedCard />
           <FeaturedCard />
         </div>
       </div>
