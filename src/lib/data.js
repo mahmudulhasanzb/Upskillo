@@ -10,11 +10,10 @@ export const fetchCourses = async () => {
   return data;
 };
 
-
-export const fetchCourseDetais = async (courseId) => {
+export const fetchCourseDetails = async (courseId) => {
   const res = await fetch(
-    `http://localhost:8000/courses/${courseId}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/courses/${courseId}`,
   );
-  const data = res.json()
-  return data
-}
+  const data = await res.json();
+  return data;
+};

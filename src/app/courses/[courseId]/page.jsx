@@ -1,11 +1,11 @@
 import { Chip } from '@heroui/react';
 import { BookOpen, Clock, BarChart, Users } from 'lucide-react';
 import Image from 'next/image';
-import { fetchCourseDetais } from '@/lib/data';
+import { fetchCourseDetails } from '@/lib/data';
 
 const CourseDetailsPage = async ({ params }) => {
   const { courseId } = await params;
-  const course = await fetchCourseDetais(courseId);
+  const course = await fetchCourseDetails(courseId);
 
   const {
     _id,
