@@ -4,11 +4,28 @@ import { Button, Input } from '@heroui/react';
 import Link from 'next/link';
 import { Mail, Lock, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
-
+import toast from 'react-hot-toast';
+import { authClient } from '@/lib/auth-client';
 
 export default function Login() {
+  const handleLogin = async e => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const userData = Object.fromEntries(formData.entries());
+    const { email, password } = userData;
 
+    const { data, error } = await authClient.signIn.email({
+      email,
+      password,
+      callbackURL: '/',
+    });
 
+    if (data) {
+      toast.success('Login successful');
+    } else {
+      toast.error(error?.message);
+    }
+  };
 
   return (
     <div className="min-h-[80vh] flex flex-col bg-slate-50">
@@ -27,9 +44,7 @@ export default function Login() {
               </p>
             </div>
 
-            <form 
-            // onSubmit={handleLogin} 
-            className="space-y-6">
+            <form onSubmit={handleLogin} className="space-y-6">
               <div className="space-y-2">
                 <label
                   htmlFor="email"

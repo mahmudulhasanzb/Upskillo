@@ -4,12 +4,14 @@ import { Button, Input } from '@heroui/react';
 import Link from 'next/link';
 import { User, Mail, Lock, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
-import { authClient } from '@/lib/auth-client';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
+import { authClient } from '@/lib/auth-client';
 
 const SignUpPage = () => {
+
   const router = useRouter();
+  
   const handleSignUp = async e => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -23,6 +25,9 @@ const SignUpPage = () => {
       name,
       image,
     });
+
+    console.log(data, error);
+
     if (data) {
       router.push('/');
       toast.success('Account created successfully');
