@@ -21,6 +21,10 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleSignOut = async () => {
+    await authClient.signOut();
+  };
+
   return (
     <nav
       className={`sticky top-0 w-full z-50 transition-all duration-300 ${
@@ -84,7 +88,7 @@ const Navbar = () => {
                     className="w-10 h-10 rounded-full object-cover ring-2 ring-blue-600/10"
                   />
                   <div className="text-left hidden lg:block">
-                    <p className="text-sm font-bold truncate max-w-25">
+                    <p className="text-sm text-black font-bold truncate max-w-25">
                       {user?.name}
                     </p>
                     <p className="text-[10px] text-slate-500">Student</p>
@@ -92,26 +96,31 @@ const Navbar = () => {
                 </button>
                 <div className="absolute right-0 top-12 w-56 bg-white border border-slate-200 rounded-2xl shadow-2xl hidden group-hover:flex flex-col py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
                   <div className="px-4 py-3 border-b border-slate-100">
-                    <p className="font-bold text-sm">Welcome back!</p>
+                    <p className="font-bold text-sm text-slate-800">Welcome back!</p>
                     <p className="text-xs truncate text-slate-500">
                       {user?.email}
                     </p>
                   </div>
-                  <Link
-                    href="/dashboard"
-                    className="px-4 py-2 text-sm hover:bg-muted flex items-center gap-3 transition-colors"
-                  >
-                    <LayoutDashboard className="w-4 h-4" /> Dashboard
-                  </Link>
-                  <Link
-                    href="/settings"
-                    className="px-4 py-2 text-sm hover:bg-muted flex items-center gap-3 transition-colors"
-                  >
-                    <User className="w-4 h-4" /> Settings
-                  </Link>
-                  <button className="px-4 py-2 text-sm text-red-500 hover:bg-red-50 flex items-center gap-3 transition-colors text-left">
-                    <LogOut className="w-4 h-4" /> Log Out
-                  </button>
+                  <div className="p-1 flex flex-col gap-1">
+                    <Link
+                      href="/dashboard"
+                      className="px-3 py-2 text-sm text-slate-700 hover:text-blue-600 hover:bg-slate-50 flex items-center gap-3 transition-colors rounded-xl"
+                    >
+                      <LayoutDashboard className="w-4 h-4 text-slate-500" /> Dashboard
+                    </Link>
+                    <Link
+                      href="/settings"
+                      className="px-3 py-2 text-sm text-slate-700 hover:text-blue-600 hover:bg-slate-50 flex items-center gap-3 transition-colors rounded-xl"
+                    >
+                      <User className="w-4 h-4 text-slate-500" /> Settings
+                    </Link>
+                    <button
+                      onClick={handleSignOut}
+                      className="px-3 py-2 text-sm text-red-500 hover:text-red-600 hover:bg-red-50 flex items-center gap-3 transition-colors text-left w-full rounded-xl"
+                    >
+                      <LogOut className="w-4 h-4" /> Log Out
+                    </button>
+                  </div>
                 </div>
               </div>
             ) : (
@@ -122,7 +131,7 @@ const Navbar = () => {
                 >
                   Login
                 </Link>
-                <Link href="/register">
+                <Link href="/signup">
                   <Button
                     color="primary"
                     className="font-bold rounded-full px-8 shadow-lg shadow-blue-600/20"
@@ -183,8 +192,8 @@ const Navbar = () => {
                   Login
                 </Button>
               </Link>
-              <Link href="/register">
-                <Button href="/register" color="primary" className="rounded-xl">
+              <Link href="/signup">
+                <Button color="primary" className="rounded-xl">
                   Join Free
                 </Button>
               </Link>

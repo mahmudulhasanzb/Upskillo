@@ -119,7 +119,7 @@ export default function Login() {
               <Button
                 onClick={handleGoogleSignIn}
                 variant="bordered"
-                className="w-full h-12 font-bold rounded-2xl border-slate-200 hover:bg-slate-50 transition-colors gap-3"
+                className="w-full h-12 font-bold rounded-2xl border-slate-200 hover:bg-slate-100 transition-colors gap-3"
               >
                 <Image
                   width={20}
