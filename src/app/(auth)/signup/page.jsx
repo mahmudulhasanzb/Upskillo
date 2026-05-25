@@ -9,9 +9,8 @@ import toast from 'react-hot-toast';
 import { authClient } from '@/lib/auth-client';
 
 const SignUpPage = () => {
-
   const router = useRouter();
-  
+
   const handleSignUp = async e => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -26,7 +25,6 @@ const SignUpPage = () => {
       image,
     });
 
-    console.log(data, error);
 
     if (data) {
       router.push('/');
@@ -35,6 +33,13 @@ const SignUpPage = () => {
       toast.error(error?.message);
     }
   };
+
+  const handleGoogleSignIn = async () => {
+    await authClient.signIn.social({
+      provider: 'google',
+    });
+  };
+
 
   return (
     <div className="min-h-[80vh] flex flex-col bg-slate-50 py-12">
@@ -147,7 +152,7 @@ const SignUpPage = () => {
 
             <div className="space-y-4">
               <Button
-                // onClick={handleGoogleSignIn}
+                onClick={handleGoogleSignIn}
                 variant="bordered"
                 className="w-full h-12 font-bold rounded-2xl border-slate-200 hover:bg-slate-50 transition-colors gap-3"
               >

@@ -27,6 +27,12 @@ export default function Login() {
     }
   };
 
+  const handleGoogleSignIn = async () => {
+    await authClient.signIn.social({
+      provider: 'google',
+    });
+  };
+
   return (
     <div className="min-h-[80vh] flex flex-col bg-slate-50">
       <div className="flex items-center justify-center p-4">
@@ -111,7 +117,7 @@ export default function Login() {
 
             <div className="space-y-4">
               <Button
-                // onClick={handleGoogleSignIn}
+                onClick={handleGoogleSignIn}
                 variant="bordered"
                 className="w-full h-12 font-bold rounded-2xl border-slate-200 hover:bg-slate-50 transition-colors gap-3"
               >
